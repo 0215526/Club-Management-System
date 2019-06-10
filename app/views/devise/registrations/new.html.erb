@@ -1,110 +1,113 @@
-<body class="cover">
-<div class="container h-100">
-  <div class="d-flex justify-content-center h-100">
-    <div class="card", style="width: 38rem; height: 50rem;">
-      <div class="card-header">
-				<h3 align="center">Rigster Now</h3>
-			</div>
-      <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
+<div class="d-flex justify-content-center h-100">
+  <div class="card", style="width: 38rem; height: 70rem;">
+    <div class="card-header">
+      <h3 class="text-center">Rigster Here</h3>
+    </div>
+    <div class="card-body justify-content-center">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-          <div class="input-group mb-3 input-group-sm ">
-            <div class="input-group-prepend">
-              <p class="input-group-text">First Name</p>
-            </div>
-              <%= f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: "First Name *" %>
-          </div>
-
-          <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-              <p class="input-group-text">Last Name</p>
-            </div>
-            <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name *"%>
-          </div>
-
-          <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-              <p class="input-group-text">Email</p>
-            </div>
-            <%= f.email_field :email, class: 'form-control', placeholder: "Email *", autocomplete: "email" %>
-          </div>
-
-          <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-              <p class="input-group-text">Date of Birth</p>
-            </div><br>
-            <%= f.date_field :dob, class: 'form-control',:value => Time.now.strftime('%Y-%m-%d'), autocomplete: "email" %>
-          </div>
-
-          <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-              <p class="input-group-text">Designation</p>
-            </div>
-            <%= f.text_field :designation, class: 'form-control', placeholder: "Designation *"%>
-          </div>
-
-          <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-              <p class="input-group-text">Company</p>
-            </div>
-            <%= f.text_field :company, class: 'form-control', placeholder: "Company *"%>
-          </div>
-
-          <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-              <p class="input-group-text">Address</p>
-            </div>
-            <%= f.text_field :address, class: 'form-control', placeholder: "Address *" %>
-          </div>
-
-          <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-              <p class="input-group-text">New Password</p>
-            </div>
-            <%= f.password_field :password, class: 'form-control', autocomplete: "new-password",placeholder: "New Password" %>
-          </div>
-          <div class="d-flex justify-content-right links small">
-            <% if @minimum_password_length %>
-              <em>( Password Should be <%= @minimum_password_length %> characters minimum)</em>
-            <% end %>
-          </div>
-
-          <div class="input-group mb-3 input-group-sm">
-            <div class="input-group-prepend">
-              <p class="input-group-text">Comfirm Password</p>
-            </div>
-            <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password", placeholder: "Comfirm Password" %>
-          </div>
-          <% if User.any?%>
-            <%= f.hidden_field :admin, value: false %>
-          <%else %>
-            <%= f.hidden_field :admin, value: true%>
-          <%end%>
-          
-          <h5 class="text-white">
-            Gender:   
-            <%= f.radio_button :gender ,'Male' %>Male
-            <%= f.radio_button :gender ,'Female'%>Female
-          </h5>
-          <div class="form-group">
-            <%= f.submit "Sign up" , class: "btn float-right login_btn" %>
-          </div>
-        <% end %>
-        <br><br><br>
-        <div class="card-footer">
-          <div class="d-flex justify-content-center links">
-            Already have an account?<%= link_to "Log in", new_session_path(resource_name), class:"ml-2 font-weight-bold" %>
-          </div>
-          <div class="d-flex justify-content-center links small">
-            <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "text-white" %>
-          </div>
-          <div class="d-flex justify-content-center links small">
-            <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class: "text-white" %>
+        <div class="form-group">
+          <%= f.label :first_name, class:"col-md-4 text-capitalize font-weight-bold text-white"%>
+          <div class="col-md-8">
+            <%= f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: "First Name"%>
           </div>
         </div>
+
+        <div class="form-group">
+          <%= f.label :last_name, class:"col-md-8 text-capitalize font-weight-bold text-white" %>
+          <div class="col-md-8">
+            <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :gender, class:"col-md-8 text-capitalize font-weight-bold text-white" %>
+          <div class="d-flex flex-row ">
+            <div class="col-md-3 ml-4 text-white">
+              <%= f.radio_button :gender ,'Female', class: 'form-check-input' %> Female
+            </div>
+            <div class="col-md-4 text-white">
+              <%= f.radio_button :gender ,'Male', class: 'form-check-input' %> Male 
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row form-group">
+          <div class="col-md-4">
+            <%= f.label :dob, class:"col-form-label ml-3 text-capitalize font-weight-bold text-white", value: "Date of Birth" %>
+          </div>
+          <div class="col-md-4">
+              <%= f.date_field :dob, :value => Time.now.strftime('%Y-%m-%d'), class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :designation, class:"col-md-4 text-capitalize font-weight-bold text-white" %>
+          <div class="col-md-8">
+            <%= f.text_field :designation, class: 'form-control', placeholder: "Designation" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :company, class:"col-md-4 text-capitalize font-weight-bold text-white" %>
+          <div class="col-md-8">
+            <%= f.text_field :company, class: 'form-control', placeholder: "Company" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :address, class:"col-md-4 text-capitalize font-weight-bold text-white" %>
+          <div class="col-md-8">
+            <%= f.text_field :address, class: 'form-control', placeholder: "Address" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, class:"col-md-4 text-capitalize font-weight-bold text-white" %>
+          <div class="col-md-8">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "Email" %>
+          </div>
+        </div>
+          
+        <div class="form-group">
+          <%= f.label :password, class:"col-md-4 text-capitalize font-weight-bold text-white"%>
+          <div class="col-md-8">
+            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: "Password"%>
+            <% if @minimum_password_length %>
+              <span class="text-danger font-weight-light text-sm-left">Required minimum of <%= @minimum_password_length %> characters</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, class:"col-md-8 text-capitalize font-weight-bold text-white" %>
+          <div class="col-md-8">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: "Confirm Password"  %>
+          </div>
+        </div>
+        <% if User.any?%>
+          <%= f.hidden_field :admin, value: false %>
+        <%else %>
+          <%= f.hidden_field :admin, value: true%>
+        <%end%>
+        
+        <div class="form-group ml-3">
+          <%= f.submit "Sign up" , class: "btn float-center login_btn" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-center links">
+        Already have an account?<%= link_to "Log in", new_session_path(resource_name), class:"ml-2 font-weight-bold" %>
+      </div>
+      <div class="d-flex justify-content-center links small">
+        <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "text-white" %>
+      </div>
+      <div class="d-flex justify-content-center links small">
+        <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class: "text-white" %>
       </div>
     </div>
   </div>
 </div>
-</body>
+

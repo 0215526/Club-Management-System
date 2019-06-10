@@ -1,0 +1,50 @@
+<div class="table-wrapper">
+	<div class="table-title">
+		<div class="row">
+			<div class="col-sm-6 p-4 text-center">
+				<h2>Club Members</h2>
+			</div>
+		</div>
+	</div>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Address</th>
+				<th>Gender</th>
+				<th>User Type</th>
+				<%if current_user.admin? %>
+					<th>Edit</th> 
+					<th>Remove</th>
+				<%end%>
+			</tr>
+		</thead>
+		<tbody>
+			<%@users.each do |user| %>
+			<tr>
+				<td><%= user.first_name %> <%= user.last_name %> </td>
+				<td><%= user.email %> </td>
+				<td><%= user.address %> </td>
+				<td><%= user.gender %> </td>
+				<td>
+					<%= user.admin_type %>
+				</td>
+				<%if current_user.admin? %> 
+					<td>	
+						<% if user.admin %>
+							<%= link_to 'Revoke Admin', users_revokeAdmin_path(id: user.id), class: "btn btn-primary btn-sm" %>
+						<% else %>
+							<%= link_to 'Make Admin', users_makeAdmin_path(id: user.id), class: "btn btn-primary btn-sm" %>
+						<% end %>
+					</td>
+					<td>
+						<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
+						<%= link_to "Delete", home_path(user), data: { confirm: "Are you sure that you wanna delete this user???" }, method: :delete, :class => 'bth bth-danger' %>
+					</td>
+				<%end%>
+			</tr>
+			<%end%>
+		</tbody>
+	</table>
+</div>
