@@ -7,14 +7,14 @@
       <div class="form-group">
         <%= f.label :first_name, class:"col-md-4 text-capitalize font-weight-bold"%>
         <div class="col-md-8">
-          <%= f.text_field :first_name, class: 'form-control', autofocus: true%>
+          <%= f.text_field :first_name, class: 'form-control', autofocus: true, required: true %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label :last_name, class:"col-md-8 text-capitalize font-weight-bold" %>
         <div class="col-md-8">
-          <%= f.text_field :last_name, class: 'form-control' %>
+          <%= f.text_field :last_name, class: 'form-control', required: true %>
         </div>
       </div>
 
@@ -30,40 +30,38 @@
         </div>
       </div>
 
-      <div class="form-row form-group">
-        <div class="col-md-4">
-          <%= f.label :dob, class:"col-form-label ml-3 text-capitalize font-weight-bold", value: "Date of Birth" %>
-        </div>
-        <div class="col-md-5">
-            <%= f.date_field :dob, :value => Time.now.strftime('%Y-%m-%d'), class: 'form-control' %>
+      <div class="form-group">
+        <%= f.label :dob, class:"col-md-4 text-capitalize font-weight-bold", value: "Date of Birth" %>
+        <div class="form-inline ml-3">
+            <%= f.date_select :dob, { order: [:day, :month, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100},{class: 'form-control mr-1', required: true} %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label :designation, class:"col-md-4 text-capitalize font-weight-bold" %>
         <div class="col-md-8">
-          <%= f.text_field :designation, class: 'form-control' %>
+          <%= f.text_field :designation, class: 'form-control', required: true %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label :company, class:"col-md-4 text-capitalize font-weight-bold" %>
         <div class="col-md-4">
-          <%= f.text_field :company, class: 'form-control' %>
+          <%= f.text_field :company, class: 'form-control', required: true %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label :address, class:"col-md-4 text-capitalize font-weight-bold" %>
         <div class="col-md-8">
-          <%= f.text_field :address, class: 'form-control' %>
+          <%= f.text_field :address, class: 'form-control', required: true %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label :email, class:"col-md-4 text-capitalize font-weight-bold" %>
         <div class="col-md-8">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true %>
         </div>
       </div>
 
@@ -99,7 +97,7 @@
       <div class="form-group">
         <%= f.label :current_password, class:"col-md-8 text-capitalize font-weight-bold" %> 
         <div class="col-md-8">
-          <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control', required: true %>
         </div>
         <span class="text-danger font-weight-light text-sm-left ml-3"><i>(we need your current password to confirm your changes)</i></span>
       </div>

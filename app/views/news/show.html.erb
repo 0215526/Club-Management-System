@@ -1,0 +1,17 @@
+<div class="row mb-2 justify-content-center">
+  <p id="notice"><%= notice %></p>
+  <div class="row mb-2 justify-content-center">
+    <div class="col-8 shadow">
+      <h4 class="text-capitalize font-weight-bold text-center border-bottom p-4"><%= @news.title %> </h4>
+      <div class="p-3 text-center">
+        <%= image_tag(@news.image, class:"image_view img-fluid")%>
+      </div>
+      <div class="p-3">
+        <%= sanitize @news.body %> 
+      <div>
+    </div>
+    <hr>
+    <%= link_to 'Edit', edit_news_path(@news) %> |
+    <%= link_to 'Back', news_index_path %>
+  </div>
+</div>

@@ -99,4 +99,27 @@ margin-left: 4px;
 }
 
 
+.trix-editor {
+    height: 200px !important;
+    max-height: 200px !important;
+    overflow-y: auto !important;
+}
 
+.image_news{
+    height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 350px;
+    align-content: center;
+    align-self: auto;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+.image_view{
+    height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 550px;
+    align-content: center;
+    align-self: auto;
+    background-color: rgba(0,0,0,0.5) !important;
+}

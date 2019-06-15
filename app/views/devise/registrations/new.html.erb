@@ -10,14 +10,14 @@
         <div class="form-group">
           <%= f.label :first_name, class:"col-md-4 text-capitalize font-weight-bold text-white"%>
           <div class="col-md-8">
-            <%= f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: "First Name"%>
+            <%= f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: "First Name", required: true%>
           </div>
         </div>
 
         <div class="form-group">
           <%= f.label :last_name, class:"col-md-8 text-capitalize font-weight-bold text-white" %>
           <div class="col-md-8">
-            <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name" %>
+            <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name", required: true %>
           </div>
         </div>
 
@@ -25,7 +25,7 @@
           <%= f.label :gender, class:"col-md-8 text-capitalize font-weight-bold text-white" %>
           <div class="d-flex flex-row ">
             <div class="col-md-3 ml-4 text-white">
-              <%= f.radio_button :gender ,'Female', class: 'form-check-input' %> Female
+              <%= f.radio_button :gender ,'Female', class: 'form-check-input', selected: "selected" %> Female
             </div>
             <div class="col-md-4 text-white">
               <%= f.radio_button :gender ,'Male', class: 'form-check-input' %> Male 
@@ -33,47 +33,45 @@
           </div>
         </div>
 
-        <div class="form-row form-group">
-          <div class="col-md-4">
-            <%= f.label :dob, class:"col-form-label ml-3 text-capitalize font-weight-bold text-white", value: "Date of Birth" %>
-          </div>
-          <div class="col-md-4">
-              <%= f.date_field :dob, :value => Time.now.strftime('%Y-%m-%d'), class: 'form-control' %>
+        <div class="form-group">
+          <%= f.label :dob, class:"col-md-4 text-capitalize font-weight-bold text-white", value: "Date of Birth" %>
+          <div class="form-inline ml-3">
+              <%= f.date_select :dob, { order: [:day, :month, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100},{class: 'form-control mr-1', required: true} %>
           </div>
         </div>
 
         <div class="form-group">
           <%= f.label :designation, class:"col-md-4 text-capitalize font-weight-bold text-white" %>
           <div class="col-md-8">
-            <%= f.text_field :designation, class: 'form-control', placeholder: "Designation" %>
+            <%= f.text_field :designation, class: 'form-control', placeholder: "Designation", required: true %>
           </div>
         </div>
 
         <div class="form-group">
           <%= f.label :company, class:"col-md-4 text-capitalize font-weight-bold text-white" %>
           <div class="col-md-8">
-            <%= f.text_field :company, class: 'form-control', placeholder: "Company" %>
+            <%= f.text_field :company, class: 'form-control', placeholder: "Company", required: true %>
           </div>
         </div>
 
         <div class="form-group">
           <%= f.label :address, class:"col-md-4 text-capitalize font-weight-bold text-white" %>
           <div class="col-md-8">
-            <%= f.text_field :address, class: 'form-control', placeholder: "Address" %>
+            <%= f.text_field :address, class: 'form-control', placeholder: "Address", required: true %>
           </div>
         </div>
 
         <div class="form-group">
           <%= f.label :email, class:"col-md-4 text-capitalize font-weight-bold text-white" %>
           <div class="col-md-8">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "Email" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "Email", required: true %>
           </div>
         </div>
           
         <div class="form-group">
           <%= f.label :password, class:"col-md-4 text-capitalize font-weight-bold text-white"%>
           <div class="col-md-8">
-            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: "Password"%>
+            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: "Password", required: true %>
             <% if @minimum_password_length %>
               <span class="text-danger font-weight-light text-sm-left">Required minimum of <%= @minimum_password_length %> characters</span>
             <% end %>
@@ -83,7 +81,7 @@
         <div class="form-group">
           <%= f.label :password_confirmation, class:"col-md-8 text-capitalize font-weight-bold text-white" %>
           <div class="col-md-8">
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: "Confirm Password"  %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: "Confirm Password", required: true %>
           </div>
         </div>
         <% if User.any?%>
@@ -98,7 +96,7 @@
       <% end %>
     </div>
     <div class="card-footer">
-      <div class="d-flex justify-content-center links">
+      <div class="d-flex justify-content-center links text-capitalize">
         Already have an account?<%= link_to "Log in", new_session_path(resource_name), class:"ml-2 font-weight-bold" %>
       </div>
       <div class="d-flex justify-content-center links small">

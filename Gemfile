@@ -57,3 +57,6 @@ gem "font-awesome-rails"
 
 # Use Devise for Authentication
 gem 'devise'
+
+# Rich Text Editor
+gem 'trix'

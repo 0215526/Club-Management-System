@@ -1,0 +1,40 @@
+
+<%= form_with(model: news, local: true) do |form| %>
+
+ <% if news.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(news.errors.count, "error") %> prohibited this news from being saved:</h2>
+
+      <ul>
+      <% news.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
+  <div class="form-group">
+    <%= form.label :title, class:"col-md-4 text-capitalize font-weight-bold" %>
+    <div class="col-md-10">
+      <%= form.text_field :title, class: 'form-control', placeholder: 'What is the title of the News?', required: true%>
+    </div>
+  </div>
+
+  <div class="form-group ">
+    <%= form.hidden_field :body, id: "post_body" %>
+    <div class="col-md-12">
+      <trix-editor input="post_body", class='form-control border border-secondary trix-editor'></trix-editor>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image, class:"col-md-4 text-capitalize font-weight-bold", value: "Attach a Image" %>
+    <div class="col-md-10">
+      <%= form.file_field :image%>
+    </div>
+  </div>
+
+  <div class="form-group col-md-12 mt-5">
+    <%= form.submit class: "btn btn-success ml-3 float-right" %>
+  </div>
+<% end %>
