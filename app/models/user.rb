@@ -3,7 +3,7 @@ class User < ApplicationRecord
   #  :omniauthable 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:confirmable, :lockable, :timeoutable, :trackable
-
+  has_many :news
   validates :first_name, :last_name, :dob, :designation, :company, :address, presence: true, length: { minimum: 3 }
   validates :gender, presence: true
 
@@ -13,5 +13,9 @@ class User < ApplicationRecord
     else
       return "User"
     end
+  end
+
+  def full_name
+    return self.first_name+" "+self.last_name
   end
 end
