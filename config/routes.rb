@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :news
   devise_for :users, :controllers => { registrations: 'registrations' }
   root to: 'homes#index'

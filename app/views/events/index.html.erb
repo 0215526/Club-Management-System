@@ -1,0 +1,42 @@
+<% content_for(:title, "Events")%>
+<h3 class="text-capitalize font-weight-bold text-center pt-4">Events</h3>
+<hr>
+<div class="row pr-5 pb-5">
+  <div class="col col-12 text-right">
+    <%if  current_user.admin? %> 
+      <%= link_to 'Add New Event', new_event_path, class: "btn btn-primary ml-3 float-right" %>
+    <%end%>
+  </div>
+</div>
+<div class="row mb-2 justify-content-center">
+  <div class="col-10">
+    <% @events.each do |event| %>
+      <div class="row align-content-center">
+        <div class="col-5 p-3">
+          <%= image_tag(event.image, class:"img-fluid", alt:"Responsive image", 
+             width:"350", height:"250")%>
+        </div>
+        <div class="col-7">
+          <h6 class="text-capitalize font-weight-bold text-center border-bottom p-2"><%= link_to event.name,  event %> </h6>
+          <span class="mt-1"> 
+            <% if event.description.length > 350 %>
+              <%= truncate(sanitize(event.description, :tags => %w()), :length => 350)  %><%= link_to 'Read more', event %>
+            <% else %>
+              <%= sanitize event.description %> 
+            <% end %>
+          </span>
+          <hr>
+          <%= link_to 'Show', event %>
+          <%if current_user.admin? %> 
+            <%= link_to 'Edit', edit_event_path(event) %>
+            <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%end%>
+          <div class="float-right text-capitalize"><%= event.user.full_name %> | Created <%= time_ago_in_words(event.created_at) %> </div>
+        </div>
+      </div>
+      <hr>
+      <%= event.event_date %> | <%= event.time_start %> | <%= event.time_end %>
+      <hr>
+    <% end %>
+  </div>
+</div>

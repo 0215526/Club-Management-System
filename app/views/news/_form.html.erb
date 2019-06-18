@@ -16,11 +16,12 @@
   <div class="form-group">
     <%= form.label :title, class:"col-md-4 text-capitalize font-weight-bold" %>
     <div class="col-md-10">
-      <%= form.text_field :title, class: 'form-control', placeholder: 'What is the title of the News?', required: true%>
+      <%= form.text_field :title, class: 'form-control', placeholder: 'What is the Title of the News?', required: true%>
     </div>
   </div>
 
   <div class="form-group ">
+    <%= form.label :body, class:"col-md-4 text-capitalize font-weight-bold", value: "Description" %>
     <%= form.hidden_field :body, id: "post_body" %>
     <div class="col-md-12">
       <trix-editor input="post_body", class='form-control border border-secondary trix-editor'></trix-editor>
@@ -28,7 +29,7 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :image, class:"col-md-4 text-capitalize font-weight-bold", value: "Attach a Image" %>
+    <%= form.label :image, class:"col-md-4 text-capitalize font-weight-bold", value: "Upload Image" %>
     <div class="col-md-10">
       <%= form.file_field :image%>
     </div>

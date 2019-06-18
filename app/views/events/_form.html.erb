@@ -1,0 +1,60 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, class:"col-md-4 text-capitalize font-weight-bold", value: "Event Name" %>
+    <div class="col-md-10">
+      <%= form.text_field :name, class: 'form-control', placeholder: 'What is the name of the Event?', required: true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, class:"col-md-4 text-capitalize font-weight-bold" %>
+    <%= form.hidden_field :description, id: "post_event" %>
+    <div class="col-md-12">
+      <trix-editor input="post_event", class='form-control border border-secondary trix-editor'></trix-editor>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :image, class:"col-md-4 text-capitalize font-weight-bold", value: "Upload Image" %>
+    <div class="col-md-10">
+      <%= form.file_field :image%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :event_date, class:"col-md-4 text-capitalize font-weight-bold" %>
+    <div class="form-inline ml-3">
+      <%= form.date_select :event_date, { order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year+10},{class: 'form-control mr-1', required: true} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :start_time, class:"col-md-4 text-capitalize font-weight-bold" %>
+    <div class="form-inline ml-3">
+      <%= form.time_select :start_time, {}, {class: 'form-control mr-1', required: true} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :end_time, class:"col-md-4 text-capitalize font-weight-bold" %>
+    <div class="form-inline ml-3">
+      <%= form.time_select :end_time,{}, {class: 'form-control mr-1', required: true} %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-12 mt-5">
+    <%= form.submit class: "btn btn-success ml-3 float-right" %>
+  </div>
+<% end %>

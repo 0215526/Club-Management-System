@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:confirmable, :lockable, :timeoutable, :trackable
   has_many :news
+  has_many :event
   validates :first_name, :last_name, :dob, :designation, :company, :address, presence: true, length: { minimum: 3 }
   validates :gender, presence: true
 

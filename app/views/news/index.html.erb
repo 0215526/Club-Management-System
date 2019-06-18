@@ -27,7 +27,7 @@
           </span>
           <hr>
           <%= link_to 'Show', news %>
-          <%if current_user.admin? %> 
+          <%if current_user.admin?%> 
             <%= link_to 'Edit', edit_news_path(news) %>
             <%= link_to 'Destroy', news, method: :delete, data: { confirm: 'Are you sure?' } %>
           <%end%>
