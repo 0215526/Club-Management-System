@@ -22,30 +22,28 @@
 		</thead>
 		<tbody>
 			<%@users.each do |user| %>
-				<%if current_user.id != user.id %>
-					<tr>
-						<td><%= user.first_name %> <%= user.last_name %> </td>
-						<td><%= user.email %> </td>
-						<td><%= user.address %> </td>
-						<td><%= user.gender %> </td>
-						<td>
-							<%= user.admin_type %>
+				<tr>
+					<td><%= user.first_name %> <%= user.last_name %> </td>
+					<td><%= user.email %> </td>
+					<td><%= user.address %> </td>
+					<td><%= user.gender %> </td>
+					<td>
+						<%= user.admin_type %>
+					</td>
+					<%if current_user.admin? %> 
+						<td>	
+							<% if user.admin %>
+								<%= link_to 'Revoke Admin', users_revokeAdmin_path(id: user.id), class: "btn btn-primary btn-sm" %>
+							<% else %>
+								<%= link_to 'Make Admin', users_makeAdmin_path(id: user.id), class: "btn btn-primary btn-sm" %>
+							<% end %>
 						</td>
-						<%if current_user.admin? %> 
-							<td>	
-								<% if user.admin %>
-									<%= link_to 'Revoke Admin', users_revokeAdmin_path(id: user.id), class: "btn btn-primary btn-sm" %>
-								<% else %>
-									<%= link_to 'Make Admin', users_makeAdmin_path(id: user.id), class: "btn btn-primary btn-sm" %>
-								<% end %>
-							</td>
-							<td>
-								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-								<%= link_to "Delete", home_path(user), data: { confirm: "Are you sure that you wanna delete this user???" }, method: :delete, :class => 'bth bth-danger' %>
-							</td>
-						<%end%>
-					</tr>
-				<%end%>
+						<td>
+							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
+							<%= link_to "Delete", home_path(user), data: { confirm: "Are you sure that you wanna delete this user???" }, method: :delete, :class => 'bth bth-danger' unless user == current_user%>
+						</td>
+					<%end%>
+				</tr>
 			<%end%>
 		</tbody>
 	</table>

@@ -1,4 +1,5 @@
-<h2 class="display-5 p-4 text-center font-weight-bold">Editing News</h2>
+<% content_for(:title, "Edit News") %>
+<h2 class="display-5 p-4 text-center font-weight-bold">Edit News</h2>
 <div class="row mb-2 justify-content-center">
     <div class="col col-md-8 shadow-lg p-4 mb-4">
         <%= render 'form', news: @news %>
