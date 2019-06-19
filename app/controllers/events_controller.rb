@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     authorize @event
+    @clubs = Club.where(" event_id= ? AND user_id= ?", params[:id].to_i, current_user)
   end
 
   # GET /events/new

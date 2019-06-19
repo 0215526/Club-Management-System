@@ -39,7 +39,6 @@
 							<% end %>
 						</td>
 						<td>
-							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
 							<%= link_to "Delete", home_path(user), data: { confirm: "Are you sure that you wanna delete this user???" }, method: :delete, :class => 'bth bth-danger' unless user == current_user%>
 						</td>
 					<%end%>

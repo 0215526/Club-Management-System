@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  resources :events
-  resources :news
-  devise_for :users, :controllers => { registrations: 'registrations' }
   root to: 'homes#index'
+  devise_for :users, :controllers => { registrations: 'registrations' }
+  resources :events do
+    resource :clubs
+    match '/clubs/:id',   to: 'clubs#register_to_event',   via: 'get', :as => :register_to_event
+  end
+  resources :news
   resources :homes
   resources :users
   delete "homes/:id", to: "homes#destroy"
