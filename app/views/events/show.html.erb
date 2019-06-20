@@ -8,7 +8,11 @@
         <div class="col col-12 text-right">
           <%if  current_user.admin? %> 
             <%= link_to 'View Member', event_clubs_path(@event), class: "btn btn-primary ml-3 float-right" %>
-            <%= link_to 'Add Member', new_event_clubs_path(@event), class: "btn btn-primary ml-3 float-right" %> 
+          <%end%>
+          <%if @event.event_categorize == "upcoming" %>
+            <%if  current_user.admin? %> 
+              <%= link_to 'Add Member', new_event_clubs_path(@event), class: "btn btn-primary ml-3 float-right" %> 
+            <%end%>
             <%if @clubs.empty?%>
               <%= link_to 'Register', event_register_to_event_path(event_id: @event,user_id: @current_user), class: "btn btn-primary ml-3 float-right" %>
             <%else%>

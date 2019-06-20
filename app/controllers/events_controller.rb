@@ -6,7 +6,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.all.order("event_date ASC")
+    @registered_events = Club.where(user_id: current_user)
     authorize @events
   end
 
@@ -64,6 +65,7 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     authorize @event
+    Club.where(event_id: params[:id]).delete_all
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }

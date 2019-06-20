@@ -11,9 +11,27 @@ class Event < ApplicationRecord
     def time_start
         return self.start_time.to_s(:time)
     end
+
     def time_end
         return self.end_time.to_s(:time)
     end
+
+    def event_categorize
+        if Time.now.strftime("%m/%d/%Y") > self.event_date.strftime("%m/%d/%Y")
+            return "past"
+        elsif Time.now.strftime("%m/%d/%Y") < self.event_date.strftime("%m/%d/%Y")
+            return "upcoming"
+        else
+            if self.start_time.strftime( "%H%M%S%N" ) > Time.now.strftime( "%H%M%S%N" )
+                return "upcoming"
+            elsif self.end_time.strftime( "%H%M%S%N" ) < Time.now.strftime( "%H%M%S%N" )
+                return "past"
+            else
+                return "current"
+            end
+        end
+    end
+
     private
     def image_valid
         if image.attached? == false

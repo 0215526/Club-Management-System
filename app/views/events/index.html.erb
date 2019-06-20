@@ -1,42 +1,177 @@
 <% content_for(:title, "Events")%>
-<h3 class="text-capitalize font-weight-bold text-center pt-4">Events</h3>
-<hr>
-<div class="row pr-5 pb-5">
-  <div class="col col-12 text-right">
+
+<div class="row pt-2 ">
+  <div class="col col-6 text-right">
+    <h3 class="text-capitalize font-weight-bold pt-4">Events</h3>
+  </div>
+  
+  <div class="col col-6 pt-3 text-right">
     <%if  current_user.admin? %> 
       <%= link_to 'Add New Event', new_event_path, class: "btn btn-primary ml-3 float-right" %>
     <%end%>
   </div>
 </div>
-<div class="row mb-2 justify-content-center">
-  <div class="col-10">
-    <% @events.each do |event| %>
-      <div class="row align-content-center">
-        <div class="col-5 p-3">
-          <%= image_tag(event.image, class:"img-fluid", alt:"Responsive image", 
-             width:"350", height:"250")%>
-        </div>
-        <div class="col-7">
-          <h6 class="text-capitalize font-weight-bold text-center border-bottom p-2"><%= link_to event.name,  event %> </h6>
-          <span class="mt-1"> 
-            <% if event.description.length > 350 %>
-              <%= truncate(sanitize(event.description, :tags => %w()), :length => 350)  %><%= link_to 'Read more', event %>
-            <% else %>
-              <%= sanitize event.description %> 
-            <% end %>
-          </span>
-          <hr>
-          <%= link_to 'Show', event %>
-          <%if current_user.admin? %> 
-            <%= link_to 'Edit', edit_event_path(event) %>
-            <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <%end%>
-          <div class="float-right text-capitalize"><%= event.user.full_name %> | Created <%= time_ago_in_words(event.created_at) %> </div>
-        </div>
+<hr>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="nav-item col-3">
+    <a class="nav-link active" data-toggle="tab" href="#upcoming">Upcoming Events</a>
+  </li>
+  <li class="nav-item col-3">
+    <a class="nav-link" data-toggle="tab" href="#past">Past Events </a>
+  </li>
+  <li class="nav-item col-3">
+    <a class="nav-link" data-toggle="tab" href="#current">Current Events</a>
+  </li>
+  <li class="nav-item col-3">
+    <a class="nav-link" data-toggle="tab" href="#registered">Registered Events</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane container active" id="upcoming">
+    <div class="row mb-2 justify-content-center">
+      <div class="col-10">        
+        <% @events.each do |event| %>
+          <% if event.event_categorize == "upcoming" %>
+            <div class="row align-content-center">
+              <div class="col-5 p-3">
+                <%= image_tag(event.image, class:"img-fluid", alt:"Responsive image", 
+                  width:"350", height:"250")%>
+              </div>
+              <div class="col-7">
+                <h6 class="text-capitalize font-weight-bold text-center border-bottom p-2"><%= link_to event.name,  event %> </h6>
+                <span class="mt-1"> 
+                  <% if event.description.length > 350 %>
+                    <%= truncate(sanitize(event.description, :tags => %w()), :length => 350)  %><%= link_to 'Read more', event %>
+                  <% else %>
+                    <%= sanitize event.description %> 
+                  <% end %>
+                </span>
+                <hr>
+                <%= link_to 'Show', event %>
+                <%if current_user.admin? %> 
+                  <%= link_to 'Edit', edit_event_path(event) %>
+                  <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%end%>
+                <div class="float-right text-capitalize"><%= event.user.full_name %> | Created <%= time_ago_in_words(event.created_at) %> </div>
+              </div>
+            </div>
+            <hr>
+            <%= event.event_date %> | <%= event.time_start %> | <%= event.time_end %>
+            <hr>
+          <% end %>
+        <% end %>
       </div>
-      <hr>
-      <%= event.event_date %> | <%= event.time_start %> | <%= event.time_end %>
-      <hr>
-    <% end %>
+    </div>
+  </div>
+  <div class="tab-pane container fade" id="past">
+    <div class="row mb-2 justify-content-center">
+      <div class="col-10">
+        <% @events.each do |event| %>
+          <% if event.event_categorize == "past" %>
+            <div class="row align-content-center">
+              <div class="col-5 p-3">
+                <%= image_tag(event.image, class:"img-fluid", alt:"Responsive image", 
+                  width:"350", height:"250")%>
+              </div>
+              <div class="col-7">
+                <h6 class="text-capitalize font-weight-bold text-center border-bottom p-2"><%= link_to event.name,  event %> </h6>
+                <span class="mt-1"> 
+                  <% if event.description.length > 350 %>
+                    <%= truncate(sanitize(event.description, :tags => %w()), :length => 350)  %><%= link_to 'Read more', event %>
+                  <% else %>
+                    <%= sanitize event.description %> 
+                  <% end %>
+                </span>
+                <hr>
+                <%= link_to 'Show', event %>
+                <%if current_user.admin? %> 
+                  <%= link_to 'Edit', edit_event_path(event) %>
+                  <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%end%>
+                <div class="float-right text-capitalize"><%= event.user.full_name %> | Created <%= time_ago_in_words(event.created_at) %> </div>
+              </div>
+            </div>
+            <hr>
+            <%= event.event_date %> | <%= event.time_start %> | <%= event.time_end %>
+            <hr>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane container fade" id="current">
+    <div class="row mb-2 justify-content-center">
+      <div class="col-10">
+        <% @events.each do |event| %>
+          <% if event.event_categorize == "current" %>
+            <div class="row align-content-center">
+              <div class="col-5 p-3">
+                <%= image_tag(event.image, class:"img-fluid", alt:"Responsive image", 
+                  width:"350", height:"250")%>
+              </div>
+              <div class="col-7">
+                <h6 class="text-capitalize font-weight-bold text-center border-bottom p-2"><%= link_to event.name,  event %> </h6>
+                <span class="mt-1"> 
+                  <% if event.description.length > 350 %>
+                    <%= truncate(sanitize(event.description, :tags => %w()), :length => 350)  %><%= link_to 'Read more', event %>
+                  <% else %>
+                    <%= sanitize event.description %> 
+                  <% end %>
+                </span>
+                <hr>
+                <%= link_to 'Show', event %>
+                <%if current_user.admin? %> 
+                  <%= link_to 'Edit', edit_event_path(event) %>
+                  <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%end%>
+                <div class="float-right text-capitalize"><%= event.user.full_name %> | Created <%= time_ago_in_words(event.created_at) %> </div>
+              </div>
+            </div>
+            <hr>
+            <%= event.event_date %> | <%= event.time_start %> | <%= event.time_end %>
+            <hr>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane container fade" id="registered">
+    <div class="tab-pane container active" id="upcoming">
+    <div class="row mb-2 justify-content-center">
+      <div class="col-10">
+        <% @registered_events.each do |c| %>
+          <div class="row align-content-center">
+            <div class="col-5 p-3">
+              <%= image_tag(c.event.image, class:"img-fluid", alt:"Responsive image", 
+                width:"350", height:"250")%>
+            </div>
+            <div class="col-7">
+              <h6 class="text-capitalize font-weight-bold text-center border-bottom p-2"><%= link_to c.event.name,   event_path(id: c.event_id) %> </h6>
+              <span class="mt-1"> 
+                <% if c.event.description.length > 350 %>
+                  <%= truncate(sanitize(c.event.description, :tags => %w()), :length => 350)  %><%= link_to 'Read more', event_path(id: c.event_id) %>
+                <% else %>
+                  <%= sanitize c.event.description %> 
+                <% end %>
+              </span>
+              <hr>
+              <%= link_to 'Show', event_path(id: c.event_id) %>
+              <%if current_user.admin? %> 
+                <%= link_to 'Edit', edit_event_path(c.event_id) %>
+                <%= link_to 'Destroy', event_path(id: c.event), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%end%> 
+
+              <div class="float-right text-capitalize"><%= c.event.user.full_name %> | Created <%= time_ago_in_words(c.event.created_at) %> </div>
+            </div>
+          </div>
+          <hr>
+          <%= c.event.event_date %> | <%= c.event.time_start %> | <%= c.event.time_end %>
+          <hr>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

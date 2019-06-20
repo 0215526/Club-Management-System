@@ -28,7 +28,7 @@
 						<td><%= club.user.email %> </td>
 						<td><%= club.user.gender %> </td>
 		
-						<%if current_user.admin? %> 
+						<%if current_user.admin? and club.event.event_categorize == "upcoming" %> 
 							<td>
 								<%= link_to "De-register", event_clubs_path(id: club), data: { confirm: "Are you sure that you wanna remove this user???" }, method: :delete, :class => 'btn btn-danger' unless club.user == current_user%>
 							</td>
