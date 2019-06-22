@@ -6,8 +6,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all.order("event_date ASC")
-    @registered_events = Club.where(user_id: current_user)
+    @events = Event.all.order("event_date DESC")
+    @registered_events = Club.where(user_id: current_user).order("created_at DESC")
     authorize @events
   end
 

@@ -1,0 +1,8 @@
+<p>
+  A new news is added by <%= @admin_name %>
+</p>
+<b><%= link_to @news.title, @news %></b>
+<p>
+  <%= sanitize @body %>
+  <%=link_to "Read more from here", @news %>
+</p>

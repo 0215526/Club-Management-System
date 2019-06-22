@@ -1,7 +1,9 @@
 class ClubsController < ApplicationController
   before_action :authenticate_user!
+
   def show
-    @clubs = Club.where(event: params[:event_id])
+    authorize Club
+    @clubs = Club.where(event: params[:event_id])  
   end
 
   def destroy
@@ -16,6 +18,7 @@ class ClubsController < ApplicationController
   end
 
   def new
+    authorize Club
     @clubs = Club.where(event: params[:event_id]).select("user_id")
     @users = User.where("id not in (?)", @clubs)
   end
