@@ -1,6 +1,4 @@
-A new news is added by <%= @admin_name %>
+Hello <%= @full_name%>
+A new news titled "<%= @topic %>" is added by <%= @admin_name %>
 
-    <%= @topic %>
-    <%= Ssanitize @body %>
-
-Remore from here: <%= news_url(@news) %>
+Visit this link to read more: <%= news_url(@news) %>

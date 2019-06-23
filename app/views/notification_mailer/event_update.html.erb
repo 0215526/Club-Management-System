@@ -1,8 +1,7 @@
+<p>Hello <%= @full_name%></p>
 <p>
-  A new news is added by <%= @admin_name %>
+  The event "<b><%= link_to @event.name, @event %></b>" is Updated
 </p>
-<b><%= link_to @news.title, @news %></b>
 <p>
-  <%= sanitize @body %>
-  <%=link_to "Read more from here", @news) %>
+  <%=link_to "Click here to read more", @event %>
 </p>

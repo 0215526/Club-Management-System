@@ -52,6 +52,8 @@ class EventsController < ApplicationController
     authorize @event
     respond_to do |format|
       if @event.update(event_params)
+        @users = Club.where(" event_id= ? ", @event.id)
+        NotificationMailer.send_notification(@event, @users)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else

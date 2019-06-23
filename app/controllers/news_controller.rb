@@ -27,8 +27,8 @@ class NewsController < ApplicationController
     @news.user = current_user
     respond_to do |format|
       if @news.save
-        @user = User.first
-        NotificationMailer.new_news(@news, @user).deliver_later
+        @users = User.all
+        NotificationMailer.send_mail(@news, @users)
         format.html { redirect_to @news, notice: 'News was successfully created.' }
         format.json { render :show, status: :created, location: @news }
       else

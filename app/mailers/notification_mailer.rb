@@ -1,29 +1,29 @@
 class NotificationMailer < ApplicationMailer
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.notification_mailer.new_news.subject
-  #
-  def new_news(news, users)
-    @news = news
-    @admin_name = @news.user.first_name
-    @body = news.body[0..50]
-
-    @users.each do |user|
-       mail to: user.email
+  def self.send_mail(news, users)
+    users.each do |user|
+      new_news(news,user).deliver_later
     end
-    
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.notification_mailer.event_update.subject
-  #
-  def event_update
-    @greeting = "Hi"
+  def new_news(news, user)
+    @news = news
+    @admin_name = @news.user.first_name
+    @full_name = user.full_name
 
-    mail to: "to@example.org"
+    mail(to: user.email, subject: 'Added New News')  
+  end
+
+  def self.send_notification(event, users)
+    users.each do |user|
+      event_update(event, user).deliver_later
+    end
+  end
+
+  def event_update(event, user)
+    @full_name = user.user.full_name
+    @event = event
+
+    mail(to: user.user.email, subject: 'Update in the Event')
   end
 end
