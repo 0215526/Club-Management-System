@@ -113,3 +113,43 @@ margin-left: 4px;
     align-self: auto;
     background-color: rgba(0,0,0,0.5) !important;
 }
+
+
+// $easeTime: 0.25s;
+// $margin-top: 56px;
+
+// $colors: (
+//     "mattBlackLight": "#303337",
+//     "mattBlackDark": "#212121",
+//     "mattGray": "#878d8d",
+//     "mattRed": "#ec6271"
+// );
+
+// @each $colorName,$colorValue in $colors{
+//     .bg-#{$colorName}{
+//         background-color: #{$colorValue};
+//     }
+//     .text-#{$colorName}{
+//         color: #{$colorValue};
+//     }
+// }
+
+// body{
+//     @extend .bg-mattBlackDark;
+//     @extend .text-mattGray;
+// }
+
+// .wrapper{
+//     margin-top: rem($margin-top);
+//     .sideMenu{
+//         position: fixed;
+//         top: 0;
+//         bottom: 0;
+//         left: 0;
+//         margin: rem($margin-top) auto auto;
+//         width:  rem(200px);
+//         border: 1px solid red;
+//         transition: all ease $easeTime;
+//         z-index: ;
+//     }
+// }

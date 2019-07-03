@@ -4,9 +4,7 @@
       <h3 class="text-center">Rigster Here</h3>
     </div>
     <div class="card-body justify-content-center">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true )do |f| %>
         <div class="form-group">
           <%= f.label :first_name, class:"col-md-4 text-capitalize font-weight-bold text-white"%>
           <div class="col-md-8">
@@ -17,7 +15,7 @@
         <div class="form-group">
           <%= f.label :last_name, class:"col-md-8 text-capitalize font-weight-bold text-white" %>
           <div class="col-md-8">
-            <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name", required: true %>
+            <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name", required: true, validate: true%>
           </div>
         </div>
 

@@ -1,6 +1,8 @@
 
-<%= form_with(model: news, local: true) do |form| %>
+<%= form_with(model: news, local: true, validate: true) do |form| %>
 
+ <%
+=begin%>
  <% if news.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(news.errors.count, "error") %> prohibited this news from being saved:</h2>
@@ -11,7 +13,9 @@
       <% end %>
       </ul>
     </div>
-  <% end %> 
+  <% end %>  
+<%
+=end%>
 
   <div class="form-group">
     <%= form.label :title, class:"col-md-4 text-capitalize font-weight-bold" %>
