@@ -71,3 +71,5 @@ gem "pundit"
 
 # Client Side Validations
 gem 'client_side_validations'
+
+gem 'material_icons'
