@@ -3,7 +3,7 @@ class News < ApplicationRecord
     belongs_to :user
     validates :body, presence: true, length: { minimum: 32 }
     validates :title, uniqueness: true, presence: true, length: { minimum: 3 }
-    validate :image_valid
+    #validate :image_valid
 
     private
     def image_valid

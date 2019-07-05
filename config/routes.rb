@@ -5,6 +5,11 @@ Rails.application.routes.draw do
     resource :clubs
     match '/clubs/:id',   to: 'clubs#register_to_event',   via: 'get', :as => :register_to_event
   end
+  # devise_scope :user do
+  #   get "signup", to: "devise/registrations#new"
+  #   get "login", to: "devise/sessions#new"
+  #   get "logout", to: "devise/sessions#destroy"
+  # end
   resources :news
   resources :homes
   resources :users

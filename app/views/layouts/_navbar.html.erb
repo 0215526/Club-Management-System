@@ -29,12 +29,12 @@
                 <i class="material-icons icon">
                 person
                 </i>
-                <span class="text">Account</span>
+                <span class="text"><%= current_user.first_name %></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Profile</a>
+                <a href="/homes/<%= current_user.id %>"  class="dropdown-item">Profile</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Logout</a>
+                <%= link_to  "Log Out", destroy_user_session_path, :method => "delete", class: "dropdown-item" %>
             </div>
             </li>
         </ul>
@@ -45,50 +45,35 @@
         <div class="sidebar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="#" class="nav-link px-2">
+                    <a href="/news/" class="nav-link px-2">
                     <i class="material-icons icon">
                         dashboard
                     </i>
-                    <span class="text">Dashboard</span>
+                    <span class="text">News</span>
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/events/" class="nav-link px-2">
+                      <i class="material-icons icon">
+                        event
+                      </i>
+                    <span class="text">Events</span></a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link px-2">
+                      <i class="material-icons icon">
+                        people
+                      </i>
+                      <span class="text">Members</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/homes/<%= current_user.id %>" class="nav-link px-2">
                     <i class="material-icons icon">
-                        person
+                      person
                     </i>
-                    <span class="text">User Profile</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2">
-                    <i class="material-icons icon"> insert_chart </i
-                    ><span class="text">Charts</span></a
-                    >
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2">
-                    <i class="material-icons icon">
-                        settings
-                    </i>
-                    <span class="text">Settings</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2">
-                    <i class="material-icons icon">
-                        pages
-                    </i>
-                    <span class="text">Pages</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2">
-                    <i class="material-icons icon">
-                        computer
-                    </i>
-                    <span class="text">Demo</span>
-                    </a>
+                    <span class="text">My Profile</span>
+                  </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link px-2 sideMenuToggler">
@@ -103,71 +88,9 @@
     </div>
     <div class="content">
         <main>
-            <%
-=begin%>
- <div class="container-fluid">
-                <div class="alert alert-success my-5">
-                    <strong class="d-flex justify-content-center text-center"> A like is always appreciated</strong>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 my-3">
-                        <div class="bg-mattBlackLight px-3 py-3">
-                            <h4 class="mb-2">New Clients</h4>
-                            <div class="progress" style="height: 16px;">
-                                <div
-                                    class="progress-bar bg-warning text-mattBlackDark"
-                                    role="progressbar"
-                                    style="width: 25%;"
-                                    aria-valuenow="25"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                >
-                                    25
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 my-3">
-                    <div class="bg-mattBlackLight px-3 py-3">
-                        <h4 class="mb-2">New Projects</h4>
-                        <div class="progress" style="height: 16px;">
-                            <div
-                                class="progress-bar bg-info text-mattBlackDark"
-                                role="progressbar"
-                                style="width: 50%;"
-                                aria-valuenow="25"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                            >
-                                50
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col-md-4 my-3">
-                        <div class="bg-mattBlackLight p-3">
-                            <h4 class="mb-2">Completed</h4>
-                            <div class="progress" style="height: 16px;">
-                                <div
-                                    class="progress-bar bg-success"
-                                    role="progressbar"
-                                    style="width: 80%;"
-                                    aria-valuenow="25"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                >
-                                    80
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mx-2">
-                    <%= yield %> 
-                </div>
+            <div class="container-fluid">
+                <%= yield %>
             </div> 
-<%
-=end%>
         </main>
     </div>
 </div>

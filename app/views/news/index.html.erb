@@ -1,40 +1,45 @@
 <% content_for(:title, "News")%>
-<h3 class="text-capitalize font-weight-bold text-center pt-4">News</h3>
-<hr>
-<div class="row pr-5 pb-5">
-  <div class="col col-12 text-right">
-    <%if current_user.admin? %> 
-      <%= link_to 'Add New News', new_news_path, class: "btn btn-primary ml-3 float-right" %>
-    <%end%>
-  </div>
-</div>
-<div class="row mb-2 justify-content-center">
-  <div class="col-10">
-    <% @news.each do |news| %>
-      <div class="row align-content-center">
-        <div class="col-5 p-3">
-          <%= image_tag(news.image, class:"img-fluid", alt:"Responsive image", 
-             width:"350", height:"250")%>
+<div class="row">
+  <div class="col-md-12 my-3">
+    <div class="bg-mattBlackLight px-3 py-3">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <h4 class="mb-2 text-center">News</h4>
         </div>
-        <div class="col-7">
-          <h6 class="text-capitalize font-weight-bold text-center border-bottom p-2"><%= link_to news.title, news %> </h6>
-          <span class="mt-1"> 
-            <% if news.body.length > 350 %>
-              <%= truncate(sanitize(news.body, :tags => %w()), :length => 350)  %><%= link_to 'Read more', news %>
-            <% else %>
-              <%= sanitize news.body %> 
-            <% end %>
-          </span>
-          <hr>
-          <%= link_to 'Show', news %>
-          <%if current_user.admin?%> 
-            <%= link_to 'Edit', edit_news_path(news) %>
-            <%= link_to 'Destroy', news, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <div class="col-md-3">
+          <%if current_user.admin? %>
+            <%= link_to 'Add New News', new_news_path, class: "btn btn-dark  border ml-2 float-right" %>
           <%end%>
-          <div class="float-right text-capitalize"><%= news.user.full_name %> | Created <%= time_ago_in_words(news.created_at) %> </div>
         </div>
       </div>
       <hr>
-    <% end %>
+      <% @news.each do |news| %>
+        <div class="row align-content-center">
+          <div class="col-4 p-3">
+            <%= image_tag(news.image, class:"img-fluid", alt:"Responsive image",
+                          width:"300", height:"100%") %>
+          </div>
+          <div class="col-8">
+            <h5 class="text-capitalize text-center border-bottom p-2"><%= link_to news.title, news %> </h5>
+            <span class="mt-1">
+              <% if news.body.length > 350 %>
+                <%= truncate(sanitize(news.body, :tags => %w()), :length => 350)  %><%= link_to 'Read more', news %>
+              <% else %>
+                <%= sanitize news.body %>
+              <% end %>
+            </span>
+            <hr>
+            <%= link_to 'Show', news %>
+            <%if current_user.admin?%>
+              <%= link_to 'Edit', edit_news_path(news) %>
+              <%= link_to 'Remove', news, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%end%>
+            <div class="float-right text-capitalize"><%= news.user.full_name %> | Created <%= time_ago_in_words(news.created_at) %> ago</div>
+          </div>
+        </div>
+        <hr>
+      <% end %>
+    </div>
   </div>
 </div>

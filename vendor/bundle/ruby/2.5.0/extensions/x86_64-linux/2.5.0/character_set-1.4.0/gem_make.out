@@ -1,0 +1,32 @@
+current directory: /home/prakash/Selise/Club-Management-System/vendor/bundle/ruby/2.5.0/gems/character_set-1.4.0/ext/character_set
+/usr/local/rvm/rubies/ruby-2.5.5/bin/ruby -I /usr/local/rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0 -r ./siteconf20190704-16713-1yt6xei.rb extconf.rb
+creating Makefile
+
+current directory: /home/prakash/Selise/Club-Management-System/vendor/bundle/ruby/2.5.0/gems/character_set-1.4.0/ext/character_set
+make "DESTDIR=" clean
+
+current directory: /home/prakash/Selise/Club-Management-System/vendor/bundle/ruby/2.5.0/gems/character_set-1.4.0/ext/character_set
+make "DESTDIR="
+compiling character_set.c
+In file included from /usr/local/rvm/rubies/ruby-2.5.5/include/ruby-2.5.0/ruby.h:33:0,
+                 from character_set.c:1:
+character_set.c: In function ‘cs_alloc_len’:
+/usr/local/rvm/rubies/ruby-2.5.5/include/ruby-2.5.0/ruby/ruby.h:1172:61: warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+ #define TypedData_Make_Struct(klass, type, data_type, sval) ({\
+                                                             ^
+character_set.c:93:8: note: in expansion of macro ‘TypedData_Make_Struct’
+   cs = TypedData_Make_Struct(klass, struct cs_data, &cs_type, data);
+        ^~~~~~~~~~~~~~~~~~~~~
+character_set.c: In function ‘cs_method_hash’:
+character_set.c:233:22: warning: ‘four_byte_value’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+       four_byte_value++;
+       ~~~~~~~~~~~~~~~^~
+character_set.c: At top level:
+cc1: warning: unrecognized command line option ‘-Wno-self-assign’
+cc1: warning: unrecognized command line option ‘-Wno-constant-logical-operand’
+cc1: warning: unrecognized command line option ‘-Wno-parentheses-equality’
+linking shared-object character_set/character_set.so
+
+current directory: /home/prakash/Selise/Club-Management-System/vendor/bundle/ruby/2.5.0/gems/character_set-1.4.0/ext/character_set
+make "DESTDIR=" install
+/usr/bin/install -m 0755 character_set.so ./.gem.20190704-16713-1t1mf20/character_set

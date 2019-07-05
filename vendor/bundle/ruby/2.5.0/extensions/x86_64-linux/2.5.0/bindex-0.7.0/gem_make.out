@@ -1,0 +1,15 @@
+current directory: /home/prakash/Selise/Club-Management-System/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
+/usr/local/rvm/rubies/ruby-2.5.5/bin/ruby -I /usr/local/rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0 -r ./siteconf20190704-16713-1uy5k6p.rb extconf.rb
+creating Makefile
+
+current directory: /home/prakash/Selise/Club-Management-System/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /home/prakash/Selise/Club-Management-System/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/cruby.so
+
+current directory: /home/prakash/Selise/Club-Management-System/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -m 0755 cruby.so ./.gem.20190704-16713-hacs4l/skiptrace

@@ -5,6 +5,7 @@ class HomesController < ApplicationController
       redirect_to user_session_path
     end
     @users = User.all
+    @news = News.all.order("created_at DESC")
   end
 
   def new
