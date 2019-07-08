@@ -1,43 +1,48 @@
-<div class="table-wrapper">
-	<% if @clubs.empty? %>
-		<h4>No Members are Registered for this Event</h4>
-	<%else%>
-		<div class="table-title">
-			<div class="row">
-				<div class="col-sm-6 p-4 text-center">
-					<h4>Registered Members of <%= @clubs[0].event.name%> </h4>
-				</div>
-			</div>
-		</div>
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Gender</th>
-					<%if current_user.admin? %>
-						<th>De-register</th>
-					<%end%>
-				</tr>
-			</thead>
-			<tbody>
+<div class="row">
+  <div class="col-md-12 my-3">
+    <div class="bg-mattBlackLight px-3 py-3">
+      <% if @clubs.empty? %>
+        <h4>No Members are Registered for this Event</h4>
+      <%else%>
+        <div class="table-wrapper">
+          <div class="table-title">
+            <div class="row">
+              <div class="col-md-10 text-center p-4">
+                <h2 class="text-center">Registered Members of <%= @clubs[0].event.name%></h2>
+              </div>
+            </div>
+          </div>
+          <table class="table table-dark">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <%if current_user.admin? %>
+                <th>De-register</th>
+              <%end%>
+            </tr>
+            </thead>
+            <tbody>
 
-				<%@clubs.each do |club| %>
-					<tr>
-						<td><%= club.user.first_name %> <%= club.user.last_name %> </td>
-						<td><%= club.user.email %> </td>
-						<td><%= club.user.gender %> </td>
-		
-						<%if current_user.admin? and club.event.event_categorize == "upcoming" %> 
-							<td>
-								<%= link_to "De-register", event_clubs_path(id: club), data: { confirm: "Are you sure that you wanna remove this user???" }, method: :delete, :class => 'btn btn-danger' unless club.user == current_user%>
-							</td>
-						<%end%> 
+            <%@clubs.each do |club| %>
+              <tr>
+                <td><%= club.user.first_name %> <%= club.user.last_name %> </td>
+                <td><%= club.user.email %> </td>
+                <td><%= club.user.gender %> </td>
 
-					</tr>
-				<%end%> 
+                <%if current_user.admin? and club.event.event_categorize == "upcoming" %>
+                  <td>
+                    <%= link_to "De-register", event_clubs_path(id: club), data: { confirm: "Are you sure that you wanna remove this user???" }, method: :delete, :class => 'btn btn-danger'%>
+                  </td>
+                <%end%>
 
-			</tbody>
-		</table>
-	<%end%>
+              </tr>
+            <%end%>
+            </tbody>
+          </table>
+        </div>
+      <%end %>
+    </div>
+  </div>
 </div>

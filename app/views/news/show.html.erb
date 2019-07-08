@@ -1,24 +1,27 @@
 <% content_for(:title, "#{@news.title}")%>
-<div class="row mb-2 justify-content-center">
-  <%
-=begin%>
- <p id="notice"><%= notice %></p> 
-<%
-=end%>
-  <div class="row mb-2 justify-content-center">
-    <div class="col-8 shadow">
-      <h4 class="text-capitalize font-weight-bold text-center border-bottom p-4"><%= @news.title %> </h4>
-      <div class="p-3 text-center">
-        <%= image_tag(@news.image, class:"image_view img-fluid")%>
+<div class="row">
+  <div class="col-md-12 my-3">
+    <p id="notice"><%= notice %></p>
+    <div class="bg-mattBlackLight px-3 py-3">
+      <div class="row mb-2 justify-content-center">
+        <div class="col-8">
+          <h4 class="text-capitalize text-center border-bottom p-3"><%= @news.title %> </h4>
+          <div class="p-3 text-center">
+            <%= image_tag(@news.image, class:"image_view img-fluid")%>
+          </div>
+          <div class="p-3">
+            <%= sanitize @news.body %>
+          </div>
+        </div>
       </div>
-      <div class="p-3">
-        <%= sanitize @news.body %> 
-      <div>
+      <div class="row justify-content-center">
+        <div class="col-md-8 border-top pt-3">
+          <%if current_user.admin? %>
+            <%= link_to 'Edit', edit_news_path(@news), class: "btn btn-success float-right" %>
+          <%end%>
+          <%= link_to 'Back', news_index_path, class: "btn btn-info float-left"%>
+        </div>
+      </div>
     </div>
-    <hr>
-    <%if current_user.admin? %> 
-      <%= link_to 'Edit', edit_news_path(@news) %> |
-    <%end%>
-    <%= link_to 'Back', news_index_path %>
   </div>
 </div>

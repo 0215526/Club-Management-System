@@ -1,9 +1,16 @@
 <% content_for(:title, "Add News")%>
-<h2 class="display-5 p-4 text-center font-weight-bold">Add New news</h2>
-<div class="row mb-2 justify-content-center">
-    <div class="col col-md-8 shadow-lg p-4 mb-4">
-        <%= render 'form', news: @news %>
-        <%= link_to 'Cancel', news_index_path, class: "btn btn-danger ml-3" %>
+
+<div class="row">
+  <div class="col-md-12 my-3">
+    <div class="bg-mattBlackLight px-3 py-3">
+      <h2 class="display-5 p-4 text-center">Add New news</h2>
+      <div class="row mb-2 justify-content-center">
+          <div class="col col-md-8 shadow-lg p-4 mb-4">
+              <%= render 'form', news: @news %>
+              <%= link_to 'Cancel', news_index_path, class: "btn btn-danger ml-3" %>
+          </div>
+      </div>
     </div>
+  </div>
 </div>
 
