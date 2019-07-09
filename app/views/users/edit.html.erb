@@ -1,11 +1,18 @@
 <div class="row">
   <div class="col-md-12 my-3">
     <div class="bg-mattBlackLight px-3 py-3">
-      <h2 class="display-5 p-2 text-center">Edit Your Details</h2>
+      <h2 class="display-5 p-2 text-center">Edit Profile</h2>
       <hr>
       <div class="row mb-2 justify-content-center">
         <div class="col col-md-6  p-4 mb-4">
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, validate: true) do |f| %>
+          <div class="form-group ml-3">
+            <% if @user.admin %>
+              <%= link_to 'Revoke Admin', users_revokeAdmin_path(id: @user.id), class: "btn btn-primary btn-sm" %>
+            <% else %>
+              <%= link_to 'Make Admin', users_makeAdmin_path(id: @user.id), class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </div>
+          <%= form_with(model: @user, local: true, validate: true) do |f|  %>
             <div class="form-group">
               <%= f.label :first_name, class:"col-md-4 text-capitalize font-weight-bold"%>
               <div class="col-md-8">
@@ -35,7 +42,7 @@
             <div class="form-group">
               <%= f.label :dob, class:"col-md-4 text-capitalize font-weight-bold", value: "Date of Birth" %>
               <div class="form-inline ml-3">
-                  <%= f.date_select :dob, { order: [:day, :month, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100},{class: 'form-control mr-1', required: true} %>
+                <%= f.date_select :dob, { order: [:day, :month, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100},{class: 'form-control mr-1', required: true} %>
               </div>
             </div>
 
@@ -67,46 +74,9 @@
               </div>
             </div>
 
-            <%= f.hidden_field :admin, autocomplete: "email" %>
-
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-            <% end %>
-            <div class="form-group ml-3">
-            <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false">
-              Change Password
-            </button>
-            </div>
-            <div class="collapse" id="collapseExample">
-              <div class="form-group">
-                <%= f.label :password, class:"col-md-4 text-capitalize font-weight-bold", value: "new password"%>
-                <div class="col-md-8">
-                  <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-                  <% if @minimum_password_length %>
-                    <span class="text-danger font-weight-light text-sm-left">Required minimum of <%= @minimum_password_length %> characters</span>
-                  <% end %>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <%= f.label :password_confirmation, class:"col-md-8 text-capitalize font-weight-bold" %>
-                <div class="col-md-8">
-                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :current_password, class:"col-md-8 text-capitalize font-weight-bold" %>
-              <div class="col-md-8">
-                <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control', required: true %>
-              </div>
-              <span class="text-danger font-weight-light text-sm-left ml-3"><i>(we need your current password to confirm your changes)</i></span>
-            </div>
-
             <div class="form-group">
               <%= f.submit "Update", class: "btn btn-success ml-3" %>
-              <a href="/users/<%= current_user.id %>"  class="btn btn-dark float-right">Cancel</a>
+              <%= link_to "Cancel", users_path, class:"btn btn-dark float-right" %>
             </div>
           <% end %>
         </div>

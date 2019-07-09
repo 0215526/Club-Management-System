@@ -1,4 +1,5 @@
 class ClubsController < ApplicationController
+  include Pundit
   before_action :authenticate_user!
 
   def show
@@ -8,6 +9,7 @@ class ClubsController < ApplicationController
 
   def destroy
     @club = Club.find(params[:id])
+    # authorize @club
     if @club.destroy
       flash[:success] = 'Member was successfully removed.'
       redirect_to request.referer || event_clubs_path
@@ -27,6 +29,7 @@ class ClubsController < ApplicationController
     @clubs = Club.where(" event_id= ? AND user_id= ?", params[:event_id].to_i, params[:user_id].to_i)
     if @clubs.empty?
       @club = Club.new()
+      authorize @club
       @club.event_id = params[:event_id]
       @club.user_id = params[:user_id]
       if @club.save
@@ -36,5 +39,5 @@ class ClubsController < ApplicationController
       flash[:errors] = "Could not register"
       redirect_to request.referer || event_clubs_path
     end
-  end  
+  end
 end

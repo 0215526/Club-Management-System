@@ -7,10 +7,18 @@ class ClubPolicy
     end
 
     def show?
-        user.admin? 
+        user.admin?
     end
 
     def new?
         user.admin?
+    end
+
+    def register_to_event?
+        user.admin? || !user.admin?
+    end
+
+    def destroy
+        user.admin? || !user.admin?
     end
 end

@@ -11,9 +11,8 @@ Rails.application.routes.draw do
   #   get "logout", to: "devise/sessions#destroy"
   # end
   resources :news
-  resources :homes
   resources :users
-  delete "homes/:id", to: "homes#destroy"
-  match '/homes/makeAdmin/:id',   to: 'homes#makeAdmin',   via: 'get', :as => :users_makeAdmin
-  match '/homes/revokeAdmin/:id',   to: 'homes#revokeAdmin',   via: 'get', :as => :users_revokeAdmin
+  delete "users/:id", to: "users#destroy"
+  match '/users/makeAdmin/:id',   to: 'users#makeAdmin',   via: 'get', :as => :users_makeAdmin
+  match '/users/revokeAdmin/:id',   to: 'users#revokeAdmin',   via: 'get', :as => :users_revokeAdmin
 end
