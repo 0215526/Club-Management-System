@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -76,3 +77,4 @@ gem "pundit"
 gem 'client_side_validations'
 
 gem 'material_icons'
+gem 'foreman'

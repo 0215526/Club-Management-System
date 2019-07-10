@@ -5,7 +5,7 @@ RSpec.describe ClubsController, type: :controller do
     login_user
 
     let!(:event) { FactoryBot.create(:event) }
-    let!(:news) { FactoryBot.create(:news) }
+    let!(:news) { FactoryBot.create(:user)}
 
   end
 end
