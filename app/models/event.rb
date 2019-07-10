@@ -7,20 +7,22 @@ class Event < ApplicationRecord
     validates :name, uniqueness: true, presence: true, length: { minimum: 3 }
     validates :event_date, :start_time, :end_time, presence: true
     validate :image_valid
+    # validates :image, attached: true
 
     def time_start
-        return self.start_time.to_s(:time)
+        self.start_time.to_s(:time)
     end
 
     def time_end
-        return self.end_time.to_s(:time)
+        self.end_time.to_s(:time)
     end
 
     def event_categorize
-        if Time.now.strftime("%m/%d/%Y") > self.event_date.strftime("%m/%d/%Y")
-            return "past"
-        elsif Time.now.strftime("%m/%d/%Y") < self.event_date.strftime("%m/%d/%Y")
-            return "upcoming"
+        # binding.pry
+        if event_date.past?
+            "past"
+        elsif event_date.future?
+            "upcoming"
         else
             if self.start_time.strftime( "%H%M%S%N" ) > Time.now.strftime( "%H%M%S%N" )
                 return "upcoming"
@@ -34,7 +36,7 @@ class Event < ApplicationRecord
 
     private
     def image_valid
-        if image.attached? == false
+        if !image.attached?
             errors.add(:image, "Image Required.")
         elsif !image.content_type.in?(%w(image/jpeg image/png image/jpg))
             errors.add(:image, "must be a JPEG, JPG or PNG.")

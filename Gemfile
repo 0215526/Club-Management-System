@@ -39,6 +39,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'pry'
+  gem 'faker'
+  gem 'rails-controller-testing'
+  gem "database_cleaner"
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'guard-rspec', require: false
 
 end
