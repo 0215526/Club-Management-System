@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe NewsController, type: :controller do
-  describe 'News controller request specs' do
+RSpec.describe EventsController, type: :controller do
+  describe 'Events controller request specs' do
     # binding.pry
     login_user
 
@@ -22,9 +22,9 @@ RSpec.describe NewsController, type: :controller do
     end
 
     context 'GET #edit' do
-      let!(:news) { FactoryBot.create(:news) }
+      let!(:event) { FactoryBot.create(:event) }
       it 'should success and render to edit page' do
-        get :edit, params: { id: news.id}
+        get :edit, params: { id: event.id}
         expect(response).to have_http_status(200)
         expect(response).to render_template :edit
       end
@@ -43,34 +43,34 @@ RSpec.describe NewsController, type: :controller do
     # end
 
     context 'GET #show' do
-      let!(:news) { FactoryBot.create(:news) }
+      let!(:event) { FactoryBot.create(:event) }
       it 'should display the details of a particular news' do
-        get :show, params: { id: news.id }
+        get :show, params: { id: event.id }
         expect(response).to have_http_status(200)
         expect(response).to render_template :show
       end
     end
 
     context 'PUT #update' do
-      let!(:news) { FactoryBot.create(:news) }
+      let!(:event) { FactoryBot.create(:event) }
       it 'should update an existing news and display a success notice' do
         params = {
-            title: 'Test News Updated',
+            name: 'Test News Updated',
         }
-        put(:update, params: { id: news.id, news: params })
-        news.reload
+        put(:update, params: { id: event.id, event: params })
+        event.reload
         params.keys.each do |key|
-          expect(news.attributes[key.to_s]).to eq params[key]
+          expect(event.attributes[key.to_s]).to eq params[key]
         end
-        expect(flash[:notice]).to eq 'News was successfully updated.'
+        expect(flash[:notice]).to eq 'Event was successfully updated.'
       end
     end
 
     context 'DELETE #destroy' do
-      let!(:news) { FactoryBot.create(:news) }
+      let!(:event) { FactoryBot.create(:event) }
       it 'should delete a news and display a success notice' do
-        expect { delete :destroy, params: { id: news.id } }.to change(News, :count).by(-1)
-        expect(flash[:notice]).to eq 'News was successfully destroyed.'
+        expect { delete :destroy, params: { id: event.id } }.to change(Event, :count).by(-1)
+        expect(flash[:notice]).to eq 'Event was successfully destroyed.'
       end
     end
   end

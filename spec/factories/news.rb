@@ -1,11 +1,11 @@
 FactoryBot.define do
-  factory :event do
-    name {"New Events"}
-    description {"<div>Ruby on Rails is not a minimalist framework, ..."}
-    event_date {Date.current + 2.days}
-    start_time {Time.now}
-    end_time {Time.now + 3.hours}
+  factory :news do
+    title {"New Events"}
+    body {"<div>Ruby on Rails is not a minimalist framework, ..."}
+    # image {"/assets/images/bg.jpg"}
     user
+
+
     after(:build) do |news|
       if news.image.attachment.nil?
         news.image.attach(

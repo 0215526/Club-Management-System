@@ -7,7 +7,7 @@ class News < ApplicationRecord
 
     private
     def image_valid
-        if image.attached? == false
+        if !image.attached?
             errors.add(:image, "Image Required.")
         elsif !image.content_type.in?(%w(image/jpeg image/png image/jpg))
             errors.add(:image, "must be a JPEG, JPG or PNG.")

@@ -18,8 +18,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     if @user.update(user_params)
+      flash[:success] = "User Updated Successfully"
       redirect_to users_path
     else
+      flash.now[:error] = "User is not Updated"
       render 'edit'
     end
   end
