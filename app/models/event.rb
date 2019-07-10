@@ -7,6 +7,7 @@ class Event < ApplicationRecord
     validates :name, uniqueness: true, presence: true, length: { minimum: 3 }
     validates :event_date, :start_time, :end_time, presence: true
     validate :image_valid
+    validate :time_validate
     # validates :image, attached: true
 
     def time_start
@@ -24,9 +25,9 @@ class Event < ApplicationRecord
         elsif event_date.future?
             "upcoming"
         else
-            if self.start_time.strftime( "%H%M%S%N" ) > Time.now.strftime( "%H%M%S%N" )
+            if start_time.strftime( "%H%M%S%N" ) > Time.now.strftime( "%H%M%S%N" )
                 return "upcoming"
-            elsif self.end_time.strftime( "%H%M%S%N" ) < Time.now.strftime( "%H%M%S%N" )
+            elsif end_time.strftime( "%H%M%S%N" ) < Time.now.strftime( "%H%M%S%N" )
                 return "past"
             else
                 return "current"
@@ -41,5 +42,11 @@ class Event < ApplicationRecord
         elsif !image.content_type.in?(%w(image/jpeg image/png image/jpg))
             errors.add(:image, "must be a JPEG, JPG or PNG.")
         end  
+    end
+
+    def time_validate
+        if start_time.to_i>=end_time.to_i
+            errors.add(:end_time, "End Time should greater than Start Time")
+        end
     end
 end

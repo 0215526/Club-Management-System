@@ -1,3 +1,4 @@
+<% content_for(:title, @user.full_name) %>
 <div class="row">
   <div class="col-md-12 my-3">
     <div class="bg-mattBlackLight px-3 py-3">
@@ -13,7 +14,7 @@
               <tbody>
                   <tr>
                       <td>Name</td>
-                      <td><%= @user.first_name %> <%= @user.last_name %> </td>
+                      <td><%= @user.full_name %></td>
                   </tr>
                   <tr>
                       <td>Email</td>
